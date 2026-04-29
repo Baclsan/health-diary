@@ -422,3 +422,57 @@ textarea {
 .chart-helper { margin-top: 8px; font-size: .78rem; }
 .chart-legend { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 10px; font-size: .75rem; }
 .legend-line { width: 14px !important; height: 2px !important; border-radius: 999px !important; background: #c79594; transform: translateY(-2px); }
+
+
+.menu-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #f5f8ff;
+  color: #7083b3;
+  font-size: 1.05rem;
+  border: 1px solid #dfe8fb;
+}
+
+.context-menu {
+  position: absolute;
+  right: 0;
+  top: 38px;
+  z-index: 20;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid #e4eaf8;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(95, 117, 171, 0.18);
+  min-width: 148px;
+  padding: 6px;
+  display: grid;
+  gap: 6px;
+}
+
+.context-menu button {
+  border: 0;
+  background: #f6f9ff;
+  color: #4f5d86;
+  border-radius: 9px;
+  min-height: 36px;
+  text-align: left;
+  padding: 0 10px;
+  font-weight: 600;
+}
+
+.chart-wrap { margin-top: 12px; }
+.chart-grid { stroke: #e8eef9; stroke-width: 1; }
+.chart-line-glow { fill: none; stroke: rgba(106, 151, 255, 0.34); stroke-width: 6; filter: url(#soft-glow); }
+.chart-line { fill: none; stroke: #6a97ff; stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; }
+.chart-dot-glow { fill: rgba(106, 151, 255, 0.24); }
+.chart-dot { fill: #6a97ff; stroke: #ffffff; stroke-width: 1.2; }
+.chart-med-dot { fill: #f2cf62; stroke: #fff; stroke-width: .8; }
+.chart-red-dot { fill: #de5b5b; stroke: #fff; stroke-width: .8; }
+.chart-axis-label { font-size: 10px; fill: #8b96b6; }
+.chart-x-labels { display: flex; justify-content: space-between; font-size: .78rem; color: #8591b1; }
+.chart-helper { margin-top: 10px; font-size: .78rem; }
+.chart-legend { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 8px 12px; font-size: .75rem; color: #7d88a8; }
+.chart-legend span { display: inline-flex; align-items: center; }
+.chart-legend i { display:inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+.legend-line { width: 14px !important; height: 3px !important; border-radius: 999px !important; background: #6a97ff; }
+.chart-empty { padding: 12px; border-radius: 12px; background: #f5f8ff; margin-top: 10px; }

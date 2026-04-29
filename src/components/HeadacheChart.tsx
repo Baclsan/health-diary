@@ -39,19 +39,28 @@ function HeadacheChart({ entries }: HeadacheChartProps) {
   const width = 320, height = 188, left = 24, right = 12, top = 26, bottom = 30
   const innerWidth = width - left - right
   const innerHeight = height - top - bottom
-  const path = points.map((p, i) => p.intensity === null ? null : `${left + (i / (daysBack - 1)) * innerWidth},${top + ((10 - p.intensity) / 10) * innerHeight}`).filter(Boolean).join(' ')
+  const getX = (index: number) => left + (index / (daysBack - 1)) * innerWidth
+  const getY = (intensity: number) => top + ((10 - intensity) / 10) * innerHeight
+  const linePoints = points
+    .map((point, i) => (point.intensity === null ? null : [getX(i), getY(point.intensity)] as const))
+    .filter((point): point is readonly [number, number] => Boolean(point))
+
+  const path = linePoints.map(([x, y]) => `${x},${y}`).join(' ')
 
   return <div className="chart-wrap"><svg viewBox={`0 0 ${width} ${height}`} className="headache-chart" role="img" aria-label="График интенсивности головной боли за 30 дней">
     {[0, 5, 10].map((level) => <line key={level} x1={left} y1={top + ((10 - level) / 10) * innerHeight} x2={width - right} y2={top + ((10 - level) / 10) * innerHeight} className="chart-grid" />)}
+    <defs><filter id="soft-glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="1.8" result="blur" /><feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge></filter></defs>
+    {path && <polyline points={path} className="chart-line-glow" />}
     {path && <polyline points={path} className="chart-line" />}
     {points.map((p, i) => {
       if (p.intensity === null) return null
-      const x = left + (i / (daysBack - 1)) * innerWidth
-      const y = top + ((10 - p.intensity) / 10) * innerHeight
-      const medX = x + 8
-      const medY = y + 8
-      const redY = Math.max(top + 4, y - 15)
-      return <g key={p.dateKey}><circle cx={x} cy={y} r={3.2} className="chart-dot" />{p.hasMedication && <circle cx={medX} cy={medY} r={2.6} className="chart-med-dot" />}{p.hasRedFlag && <circle cx={x} cy={redY} r={2.8} className="chart-red-dot" />}</g>
+      const x = getX(i)
+      const y = getY(p.intensity)
+      const medY = Math.min(top + innerHeight - 4, y + 12)
+      const medX = p.hasRedFlag ? x - 4 : x
+      const redY = Math.max(top + 5, y - 12)
+      const redX = p.hasMedication ? x + 4 : x
+      return <g key={p.dateKey}><circle cx={x} cy={y} r={3.5} className="chart-dot-glow" /><circle cx={x} cy={y} r={3.2} className="chart-dot" />{p.hasMedication && <circle cx={medX} cy={medY} r={2.8} className="chart-med-dot" />}{p.hasRedFlag && <circle cx={redX} cy={redY} r={2.9} className="chart-red-dot" />}</g>
     })}
     {[0, 5, 10].map((level) => <text key={`label-${level}`} x={4} y={top + ((10 - level) / 10) * innerHeight + 4} className="chart-axis-label">{level}</text>)}
   </svg>
