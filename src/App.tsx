@@ -84,6 +84,7 @@ const entryToForm = (entry: HeadacheEntry): FormState => ({
 })
 
 function App() {
+  // v0.2 merged screen flows: home/add/history/detail
   const [screen, setScreen] = useState<Screen>('home')
   const [entries, setEntries] = useState<HeadacheEntry[]>(() => loadEntries())
   const [form, setForm] = useState<FormState>(() => emptyForm())
