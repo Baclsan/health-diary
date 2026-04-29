@@ -379,3 +379,28 @@ textarea {
     transform: translateY(0);
   }
 }
+
+.entry-tap { border: 0; background: transparent; text-align: left; width: 100%; }
+.row-actions { position: relative; display: flex; align-items: center; gap: 8px; }
+.menu-btn { width: 36px; height: 36px; border-radius: 10px; background: #eef0fc; color: #50608d; font-size: 1.2rem; }
+.context-menu { position: absolute; right: 0; top: 40px; z-index: 5; background: #fff; border-radius: 12px; box-shadow: var(--card-shadow); min-width: 160px; padding: 8px; display: grid; gap: 6px; }
+.context-menu button { border: 0; background: #f6f7fe; border-radius: 10px; min-height: 38px; }
+.chart-wrap { margin-top: 10px; }
+.headache-chart { width: 100%; height: auto; display: block; }
+.chart-grid { stroke: #e8e3f3; stroke-width: 1; }
+.chart-line { fill: none; stroke: #c38786; stroke-width: 2.2; }
+.chart-dot { fill: #c38786; }
+.chart-med-dot { fill: #f2c94c; }
+.chart-red-dot { fill: #de5b5b; }
+.chart-axis-label { font-size: 10px; fill: #8a7b7b; }
+.chart-x-labels { display: flex; justify-content: space-between; font-size: .78rem; color: var(--muted); }
+.chart-legend { margin-top: 8px; display: grid; gap: 4px; font-size: .78rem; }
+.chart-legend i { display:inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+.legend-line { background: #c38786; }
+.legend-med { background: #f2c94c; }
+.legend-red { background: #de5b5b; }
+.chart-empty { padding: 12px; border-radius: 12px; background: #f7f4ff; margin-top: 10px; }
+.duration-wheel { margin-top: 10px; display:flex; align-items:center; justify-content:space-between; background:#f6f7fe; border-radius:14px; padding: 10px; }
+.duration-wheel button { width:48px; height:48px; border:0; border-radius:12px; background:#fff; font-size:1.2rem; }
+.duration-wheel div { display:flex; gap: 14px; }
+.details-grid { display:grid; gap:8px; }
