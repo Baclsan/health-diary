@@ -36,7 +36,7 @@ function HeadacheChart({ entries }: HeadacheChartProps) {
   if (!points.some((p) => p.intensity !== null)) {
     return <div className="chart-empty"><p className="entry-title">Пока нет данных для графика</p><p className="muted">Добавьте записи о головной боли, чтобы увидеть динамику за 30 дней.</p></div>
   }
-  const width = 320, height = 170, left = 24, right = 12, top = 14, bottom = 24
+  const width = 320, height = 188, left = 24, right = 12, top = 26, bottom = 30
   const innerWidth = width - left - right
   const innerHeight = height - top - bottom
   const path = points.map((p, i) => p.intensity === null ? null : `${left + (i / (daysBack - 1)) * innerWidth},${top + ((10 - p.intensity) / 10) * innerHeight}`).filter(Boolean).join(' ')
@@ -48,12 +48,16 @@ function HeadacheChart({ entries }: HeadacheChartProps) {
       if (p.intensity === null) return null
       const x = left + (i / (daysBack - 1)) * innerWidth
       const y = top + ((10 - p.intensity) / 10) * innerHeight
-      return <g key={p.dateKey}><circle cx={x} cy={y} r={3.5} className="chart-dot" />{p.hasMedication && <circle cx={x + 8} cy={Math.max(top + 5, y - 10)} r={2.8} className="chart-med-dot" />}{p.hasRedFlag && <circle cx={x} cy={Math.max(top + 5, y - 14)} r={3} className="chart-red-dot" />}</g>
+      const medX = x + 8
+      const medY = y + 8
+      const redY = Math.max(top + 4, y - 15)
+      return <g key={p.dateKey}><circle cx={x} cy={y} r={3.2} className="chart-dot" />{p.hasMedication && <circle cx={medX} cy={medY} r={2.6} className="chart-med-dot" />}{p.hasRedFlag && <circle cx={x} cy={redY} r={2.8} className="chart-red-dot" />}</g>
     })}
     {[0, 5, 10].map((level) => <text key={`label-${level}`} x={4} y={top + ((10 - level) / 10) * innerHeight + 4} className="chart-axis-label">{level}</text>)}
   </svg>
   <div className="chart-x-labels"><span>{points[0]?.label}</span><span>{points[14]?.label}</span><span>{points[29]?.label}</span></div>
-  <div className="chart-legend muted"><span><i className="legend-line" /> линия/точка = интенсивность боли</span><span><i className="legend-med" /> жёлтая точка = принято лекарство</span><span><i className="legend-red" /> красная точка = красный флаг</span></div></div>
+  <p className="chart-helper muted">На графике показана максимальная интенсивность боли за каждый день.</p>
+  <div className="chart-legend muted"><span><i className="legend-line" /> интенсивность</span><span><i className="legend-med" /> лекарство</span><span><i className="legend-red" /> красный флаг</span></div></div>
 }
 
 export default HeadacheChart
