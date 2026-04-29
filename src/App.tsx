@@ -4,6 +4,8 @@ import { HeadacheChart } from './components/HeadacheChart'
 import { loadEntries, saveEntries } from './storage'
 import type { HeadacheEntry } from './types'
 
+// merge-synced with main: keep v0.2 features intact
+
 type Screen = 'home' | 'add' | 'history' | 'detail'
 
 type FormState = {
